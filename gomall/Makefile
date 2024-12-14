@@ -1,3 +1,4 @@
+export ROOT_MOD=gomall
 .PHONY: gen-demo-proto
 gen-demo-proto:
 	@cd demo/demo_proto && cwgo server -I ../../idl --type RPC --module gomall/demo/demo_proto  --service demo_proto --idl ../../idl/echo.proto
@@ -7,4 +8,9 @@ gen-demo-thrift:
 
 .PHONY: gen-frontend
 gen-frontend:
-	cwgo server --type HTTP --idl ../../idl/frontend/home.proto --service frontend -module gomall/app/frontend  -I ../../idl
+	@cd app/frontend && cwgo server --type HTTP --idl ../../idl/frontend/auth_page.proto --service frontend -module gomall/app/frontend  -I ../../idl
+.PHONY: gen-user
+gen-user:
+	@cd rpc_gen && cwgo client --type RPC  --service user --module  gomall/rpc_gen --I ../idl --idl ../idl/user.proto
+	@cd app/user && cwgo server --type RPC  --service user --module  ${ROOT_MOD}/app/user  --pass "-use  ${ROOT_MOD}/rpc_gen/kitex_gen" -I ../../idl  --idl ../../idl/user.proto
+	
