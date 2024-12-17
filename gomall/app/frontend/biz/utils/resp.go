@@ -3,7 +3,7 @@ package utils
 import (
 	"context"
 
-	"gomall/app/frontend/middleware"
+	frontendUtils "gomall/app/frontend/utils"
 
 	"github.com/cloudwego/hertz/pkg/app"
 )
@@ -24,6 +24,8 @@ func WarpResponse(ctx context.Context, c *app.RequestContext, content map[string
 	// session := sessions.Default(c)
 	// userId := session.Get("user_id")
 	// content["user_id"] = userId
-	content["user_id"] = ctx.Value(middleware.SessionUserId)
+
+	// content["user_id"] = ctx.Value(middleware.SessionUserId)
+	content["user_id"] = frontendUtils.GetUserIdFromCtx(ctx)
 	return content
 }
