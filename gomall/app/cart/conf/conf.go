@@ -59,8 +59,8 @@ func GetConf() *Config {
 }
 
 func initConf() {
-	// prefix := "conf"
-	prefix := "D:\\golang_projects\\gomall\\app\\user\\conf"
+	prefix := "conf"
+	// prefix := "D:\\golang_projects\\gomall\\app\\cart\\conf"
 	confFileRelPath := filepath.Join(prefix, filepath.Join(GetEnv(), "conf.yaml"))
 	content, err := ioutil.ReadFile(confFileRelPath)
 	if err != nil {

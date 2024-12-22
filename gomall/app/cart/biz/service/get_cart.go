@@ -20,6 +20,9 @@ func NewGetCartService(ctx context.Context) *GetCartService {
 // Run create note info
 func (s *GetCartService) Run(req *cart.GetCartReq) (resp *cart.GetCartResp, err error) {
 	// Finish your business logic.
+	if req.UserId == 0 {
+		return &cart.GetCartResp{}, nil
+	}
 	list, err := model.GetCartByUserId(s.ctx, mysql.DB, req.UserId)
 	if err != nil {
 		return nil, kerrors.NewBizStatusError(50002, err.Error())

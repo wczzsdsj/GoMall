@@ -1,20 +1,23 @@
 package main
 
 import (
-	"github.com/joho/godotenv"
-	consul "github.com/kitex-contrib/registry-consul"
-	"gomall/app/cart/biz/dal"
-	"gomall/app/cart/rpc"
 	"net"
 	"time"
+
+	"gomall/app/cart/biz/dal"
+	"gomall/app/cart/rpc"
+
+	"github.com/joho/godotenv"
+	consul "github.com/kitex-contrib/registry-consul"
+
+	"gomall/app/cart/conf"
+	"gomall/rpc_gen/kitex_gen/cart/cartservice"
 
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
 	kitexlogrus "github.com/kitex-contrib/obs-opentelemetry/logging/logrus"
 	"go.uber.org/zap/zapcore"
-	"gomall/app/cart/conf"
-	"gomall/rpc_gen/kitex_gen/cart/cartservice"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 

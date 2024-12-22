@@ -2,8 +2,10 @@ package mysql
 
 import (
 	"fmt"
-	"gomall/app/cart/conf"
 	"os"
+
+	"gomall/app/cart/biz/model"
+	"gomall/app/cart/conf"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -25,5 +27,11 @@ func Init() {
 	)
 	if err != nil {
 		panic(err)
+	}
+	if os.Getenv("GO_ENV") != "online" {
+		err = DB.AutoMigrate(&model.Cart{})
+		if err != nil {
+			panic(err)
+		}
 	}
 }

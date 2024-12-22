@@ -8,7 +8,7 @@ gen-demo-thrift:
 
 .PHONY: gen-frontend
 gen-frontend:
-	@cd app/frontend && cwgo server --type HTTP --idl ../../idl/frontend/category_page.proto --service frontend -module gomall/app/frontend  -I ../../idl
+	@cd app/frontend && cwgo server --type HTTP --idl ../../idl/frontend/cart_page.proto --service frontend -module gomall/app/frontend  -I ../../idl
 .PHONY: gen-user
 gen-user:
 	@cd rpc_gen && cwgo client --type RPC  --service user --module  gomall/rpc_gen --I ../idl --idl ../idl/user.proto

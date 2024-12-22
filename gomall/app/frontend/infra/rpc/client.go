@@ -5,6 +5,7 @@ import (
 
 	"gomall/app/frontend/conf"
 	frontendUtils "gomall/app/frontend/utils"
+	"gomall/rpc_gen/kitex_gen/cart/cartservice"
 	"gomall/rpc_gen/kitex_gen/product/productcatalogservice"
 	"gomall/rpc_gen/kitex_gen/user/userservice"
 
@@ -15,6 +16,7 @@ import (
 var (
 	UserClient    userservice.Client
 	ProductClient productcatalogservice.Client
+	CartClient    cartservice.Client
 	once          sync.Once
 )
 
@@ -22,6 +24,7 @@ func InitClient() {
 	once.Do(func() {
 		initUserClient()
 		initProductClient()
+		initCartClient()
 	})
 }
 
@@ -42,5 +45,14 @@ func initProductClient() {
 	frontendUtils.MustHandleError(err)
 	opts = append(opts, client.WithResolver(r))
 	ProductClient, err = productcatalogservice.NewClient("product", opts...)
+	frontendUtils.MustHandleError(err)
+}
+
+func initCartClient() {
+	var opts []client.Option
+	r, err := consul.NewConsulResolver(conf.GetConf().Hertz.RegistryAddr)
+	frontendUtils.MustHandleError(err)
+	opts = append(opts, client.WithResolver(r))
+	CartClient, err = cartservice.NewClient("cart", opts...)
 	frontendUtils.MustHandleError(err)
 }
