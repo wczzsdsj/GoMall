@@ -23,6 +23,7 @@ func AddItem(ctx context.Context, db *gorm.DB, item *Cart) error {
 	err := db.WithContext(ctx).
 		Model(&Cart{}).
 		Where(&Cart{UserId: item.UserId, ProductId: item.ProductId}).
+		// First(&row)
 		First(&row).Error
 	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
 		return err
