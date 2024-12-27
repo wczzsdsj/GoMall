@@ -1,0 +1,48 @@
+syntax="proto3";
+package order;
+
+import "checkout.proto";
+import "cart.proto";
+option go_package = "/order";
+
+service OrderService{
+    rpc PlaceOrder (PlaceOrderReq) returns (PlaceOrderResp){}
+    rpc ListOrder (ListOrderReq) returns (ListOrderResp){}
+}
+
+message OrderItem {
+    cart.CartItem item = 1;
+    float cost = 2;
+}
+
+message PlaceOrderReq{
+    uint32 id =1;
+    checkout.Address address =2;
+    string email=3;
+    repeated OrderItem items=4;
+}
+
+message OrderResult {
+    string order_id = 1;
+}
+
+message PlaceOrderResp {
+    OrderResult order = 1;
+}
+
+message ListOrderReq {
+    uint32 user_id = 1;
+}
+
+message Order{
+    repeated OrderItem items=1;
+    string order_id=2;
+    uint32 user_id=3;
+    checkout.Address address =4;
+    string email = 5;
+    int32 created_at = 6;
+}
+
+message ListOrderResp{
+    repeated Order orders=1;
+}
