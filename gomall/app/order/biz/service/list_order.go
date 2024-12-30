@@ -29,7 +29,7 @@ func (s *ListOrderService) Run(req *order.ListOrderReq) (resp *order.ListOrderRe
 	var orders []*order.Order
 	for _, v := range list {
 		var items []*order.OrderItem
-		for _, oi := range v.OrderItem {
+		for _, oi := range v.OrderItems {
 			items = append(items, &order.OrderItem{
 				Item: &cart.CartItem{
 					ProductId: oi.ProductId,

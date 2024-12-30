@@ -17,10 +17,10 @@ type Consignee struct {
 
 type Order struct {
 	gorm.Model
-	OrderId   string      `gorm:"type:varchar(100);uniqueIndex"`
-	UserId    uint32      `gorm:"type:int(11)"`
-	Consignee Consignee   `gorm:"embedded"`
-	OrderItem []OrderItem `gorm:"foreignKey:OrderIdRefer;references:OrderId"`
+	OrderId    string      `gorm:"type:varchar(100);uniqueIndex"`
+	UserId     uint32      `gorm:"type:int(11)"`
+	Consignee  Consignee   `gorm:"embedded"`
+	OrderItems []OrderItem `gorm:"foreignKey:OrderIdRefer;references:OrderId"`
 }
 
 func (Order) TableName() string {
