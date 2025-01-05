@@ -2,13 +2,13 @@ module gomall/app/frontend
 
 go 1.22.10
 
-require gomall/rpc_gen v0.0.0
+// require gomall/rpc_gen v0.0.0
 
 // require "gomall/rpc_gen/kitex_gen/user/userservice" v0.0.0
 
 replace github.com/apache/thrift => github.com/apache/thrift v0.13.0
 
-replace gomall/rpc_gen => ../../rpc_gen/
+replace gomall/rpc_gen => ../../rpc_gen
 
 // replace gomall/rpc_gen/kitex_gen/user/userservice => ../../../gomall/rpc_gen/kitex_gen/user/userservice
 
@@ -26,6 +26,7 @@ require (
 	github.com/kr/pretty v0.3.1
 	github.com/redis/go-redis/v9 v9.7.0
 	go.uber.org/zap v1.27.0
+	gomall/rpc_gen v0.0.0-00010101000000-000000000000
 	google.golang.org/protobuf v1.35.2
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 	gopkg.in/validator.v2 v2.0.1
