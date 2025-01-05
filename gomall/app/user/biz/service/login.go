@@ -25,7 +25,7 @@ func (s *LoginService) Run(req *user.LoginReq) (resp *user.LoginResp, err error)
 		return nil, errors.New("email or password is empty")
 	}
 	row, err := model.GetByEmail(s.ctx, mysql.DB, req.Email)
-	if err != nil {
+	if err != nil || row == nil {
 		return nil, err
 	}
 	err = bcrypt.CompareHashAndPassword([]byte(row.PasswordHashed), []byte(req.Password))

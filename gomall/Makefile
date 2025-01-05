@@ -39,6 +39,11 @@ gen-order:
 	@cd rpc_gen && cwgo client --type RPC --service order --module ${ROOT_MOD}/rpc_gen  -I ../idl  --idl ../idl/order.proto
 	@cd app/order && cwgo server --type RPC --service order --module ${ROOT_MOD}/app/order --pass "-use ${ROOT_MOD}/rpc_gen/kitex_gen"  -I ../../idl  --idl ../../idl/order.proto
 
+.PHONY: gen-email
+gen-email:
+	@cd rpc_gen && cwgo client --type RPC --service email --module ${ROOT_MOD}/rpc_gen  -I ../idl  --idl ../idl/email.proto
+	@cd app/email && cwgo server --type RPC --service email --module ${ROOT_MOD}/app/email --pass "-use ${ROOT_MOD}/rpc_gen/kitex_gen"  -I ../../idl  --idl ../../idl/email.proto
+
 # .PHONY: test
 # test:
 # 	@cd app/user-del && cwgo server --type RPC  --service user --module  ${ROOT_MOD}/app/user  --pass "-use  ${ROOT_MOD}/rpc_gen/kitex_gen" -I ../../idl  --idl ../../idl/user.proto

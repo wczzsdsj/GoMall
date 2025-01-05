@@ -2,6 +2,8 @@ package service
 
 import (
 	"context"
+	"fmt"
+
 	// "os/user"
 
 	auth "gomall/app/frontend/hertz_gen/frontend/auth"
@@ -31,8 +33,9 @@ func (h *LoginService) Run(req *auth.LoginReq) (redirect string, err error) {
 		Email:    req.Email,
 		Password: req.Password,
 	})
-	if err != nil {
-		return "", err
+	if err != nil || resp == nil {
+		redirect = "/sign-up"
+		return redirect, err
 	}
 	session := sessions.Default(h.RequestContext)
 	session.Set("user_id", resp.UserId)
@@ -42,6 +45,7 @@ func (h *LoginService) Run(req *auth.LoginReq) (redirect string, err error) {
 	}
 	redirect = "/"
 	if req.Next != "" {
+		fmt.Println(req.Next)
 		redirect = req.Next
 	}
 	return
