@@ -16,7 +16,7 @@ services:
     ports:
       - "4222:4222"
       - "8222:8222"
-  # consul:
-  #  image: "hashicorp/consul:latest"
-  #  ports:
-  #   - 8500:8500
+  consul:
+   image: "hashicorp/consul:latest"
+   ports:
+    - 8500:8500
